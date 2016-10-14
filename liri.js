@@ -38,30 +38,40 @@ if(nodeArg[2] == 'my-tweets'){
 
 else if(nodeArg[2] == 'spotify-this-song'){
 	var song = '';
-	if(nodeArg[3] != ''){
+	if(nodeArg[3] != '' && nodeArg[3] != undefined){
 		song = nodeArg[3];
+		//console.log('song: ' + song);
 	}
-
+	else{
+		//console.log('song is blank');
+		console.log("Ace of Base");
+		console.log("The Sign");
+		console.log("https://play.spotify.com/album/5UwIyIyFzkM7wKeGtRJPgB/0hrBpAOgrt8RXigk83LLNE");
+		console.log("Happy Nation");
+		
+	}
 	var params = {
 		type: 'track',
 		query: song
 	};
-	spotify.search(params, function(error, data) {
-    	if ( error ) {
-        	console.log(error);
-    	}
-    	else{
-    		var songInfo = data.tracks.items[0];
+	if(song != ''){
+		spotify.search(params, function(error, data) {
+    		if ( error ) {
+        		console.log(error);
+    		}
+    		else{
+    			var songInfo = data.tracks.items[0];
 
-    	}
- 		for(var i = 0; i< songInfo.artists.length; i++){
+    		}
+ 			for(var i = 0; i< songInfo.artists.length; i++){
 
 
-    		console.log(songInfo.artists[i].name);
-    	}
-    	console.log(song);
-    	console.log(songInfo.preview_url);
-    	console.log(songInfo.name);
+    			console.log(songInfo.artists[i].name);
+    		}
+    		console.log(song);
+    		console.log(songInfo.preview_url);
+    		console.log(songInfo.album.name);
     	
-	});
+		});
+	}
 }
