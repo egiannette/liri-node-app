@@ -19,15 +19,13 @@ var request = require('request');
 var nodeArg = process.argv;
 //console.log(nodeArg);
 if(nodeArg[2] == 'my-tweets'){
-	//console.log("yeppers");
 
 	var params = {
-  		user_id: 'Trojan_Erin',
+  		screen_name: 'Trojan_Erin',
   		count: 20
 	};
 
-	// is statuses/user_timeline the correct one?  Needs the user_id..
-	// is there one that uses the owner of the keys above
+	
 	client.get('statuses/user_timeline', params, function(error, data) {
 		if(error){
 			console.log(error);
@@ -37,7 +35,7 @@ if(nodeArg[2] == 'my-tweets'){
   		} 
 	});
 }
-/*
+
 else if(nodeArg[2] == 'spotify-this-song'){
 	var song = '';
 	if(nodeArg[3] != ''){
@@ -52,8 +50,18 @@ else if(nodeArg[2] == 'spotify-this-song'){
     	if ( error ) {
         	console.log(error);
     	}
- 
-    	console.log(data.artists ' : ' + song + ' : ' + data.spotify + ' : ' + data.name);
+    	else{
+    		var songInfo = data.tracks.items[0];
+
+    	}
+ 		for(var i = 0; i< songInfo.artists.length; i++){
+
+
+    		console.log(songInfo.artists[i].name);
+    	}
+    	console.log(song);
+    	console.log(songInfo.preview_url);
+    	console.log(songInfo.name);
+    	
 	});
 }
-*/
