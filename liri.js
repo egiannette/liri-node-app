@@ -35,7 +35,6 @@ if(nodeArg[2] == 'my-tweets'){
   		} 
 	});
 }
-
 else if(nodeArg[2] == 'spotify-this-song'){
 	var song = '';
 	if(nodeArg[3] != '' && nodeArg[3] != undefined){
@@ -48,7 +47,7 @@ else if(nodeArg[2] == 'spotify-this-song'){
 		console.log("The Sign");
 		console.log("https://play.spotify.com/album/5UwIyIyFzkM7wKeGtRJPgB/0hrBpAOgrt8RXigk83LLNE");
 		console.log("Happy Nation");
-		
+
 	}
 	var params = {
 		type: 'track',
@@ -74,4 +73,34 @@ else if(nodeArg[2] == 'spotify-this-song'){
     	
 		});
 	}
+}
+else if(nodeArg[2] == 'movie-this'){
+	var movieName = '';
+
+	if(nodeArg[3] != '' && nodeArg[3] != undefined){
+		movieName = nodeArg[3];
+		//console.log('movie: ' + movie);
+	}
+	else{
+		movieName = 'Mr. Nobody'
+	}
+
+	var queryUrl = 'http://www.omdbapi.com/?t=' + movieName +'&type=movie&tomatoes=true&plot=short&r=json';
+
+	request(queryUrl, function (error, response, body) {
+  		if (!error && response.statusCode == 200) {
+  			console.log(JSON.parse(body)["Title"]);
+    		console.log(JSON.parse(body)["Year"]);
+    		console.log(JSON.parse(body)["imdbRating"]); 
+    		console.log(JSON.parse(body)["Country"]); 
+    		console.log(JSON.parse(body)["Language"]); 
+    		console.log(JSON.parse(body)["Plot"]);
+    		console.log(JSON.parse(body)["Actors"]);
+    		console.log(JSON.parse(body)["tomatoRating"]);
+    		console.log(JSON.parse(body)["tomatoURL"]);
+  		}
+  		else{
+  			console.log(error);
+  		}
+	});
 }
